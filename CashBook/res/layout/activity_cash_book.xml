@@ -44,6 +44,11 @@
         android:layout_height="wrap_content"
         android:text="Grid View" />
     <Button
+        android:id="@+id/buttonTransDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Display Transcations" />
+    <Button
         android:id="@+id/buttonDBTrans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

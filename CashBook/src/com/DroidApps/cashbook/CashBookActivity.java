@@ -12,7 +12,7 @@ import android.widget.Button;
 public class CashBookActivity extends Activity {
 
 	public static final String TAG = CashBookActivity.class.getSimpleName();
-	Button cbHeaderEntry, cbHeaderDisplay, cbTransEntry, cbQuickEntry, cbGrid, cbDBTrans;
+	Button cbHeaderEntry, cbHeaderDisplay, cbTransEntry, cbQuickEntry, cbGrid, cbDBTrans,cbDispTrans;
 	Context context;
 
 	@Override
@@ -27,8 +27,9 @@ public class CashBookActivity extends Activity {
 		cbQuickEntry = (Button) findViewById(R.id.buttonMainQuick);
 		cbGrid = (Button) findViewById(R.id.buttonGrid);
 		cbDBTrans= (Button) findViewById(R.id.buttonDBTrans);
+		cbDispTrans=(Button) findViewById(R.id.buttonTransDisplay);
 
-		cbDBTrans.setOnClickListener(new OnClickListener() {
+		cbDispTrans.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -40,6 +41,17 @@ public class CashBookActivity extends Activity {
 
 		});
 
+		cbDBTrans.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(context, TransactionTest.class);
+				// intent.setAction("HEADER_ENTRY");
+				startActivity(intent);
+
+			}
+
+		});
 		
 		cbGrid.setOnClickListener(new OnClickListener() {
 

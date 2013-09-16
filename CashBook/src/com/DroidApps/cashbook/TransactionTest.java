@@ -25,11 +25,12 @@ public class TransactionTest extends Activity {
 		db = new DbUpdater(this);
 		tv = (TextView) findViewById(R.id.testViewText);
 		button1 = (Button) findViewById(R.id.btTextViewHeaders);
-		textV="";
+		
 		button1.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View arg0) {
+				textV="";
 				Iterator<String> it = db.getHeaders().iterator();
 				System.out.println(it.hasNext());
 				while (it.hasNext()) {
@@ -47,18 +48,19 @@ public class TransactionTest extends Activity {
 
 		});
 		
-		button2 = (Button) findViewById(R.id.btTextViewQT);
-		textV="";
+		button2 = (Button) findViewById(R.id.btTextViewTransactions);
+		
 		button2.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+				textV="";
 				Iterator<Transaction> it = db.getAllTransactions().iterator();
 				System.out.println(it.hasNext());
 				while (it.hasNext()) {
 					
 					Transaction trans=it.next();
-					textV=textV.concat(trans.getHeader()+Float.toString(trans.getAmount())+"\n");
+					textV=textV.concat(trans.getHeader()+"\t"+Float.toString(trans.getAmount())+"\n");
 					System.out.println(textV);
 				}
 				if(textV.isEmpty()){
