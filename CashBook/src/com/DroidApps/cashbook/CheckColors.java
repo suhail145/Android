@@ -17,6 +17,7 @@ public class CheckColors extends Activity {
 		setContentView(R.layout.check_color);
 		colors = new ArrayList<Color>();
 		
+		
 	}
 
 	private class Color{

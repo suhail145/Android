@@ -168,7 +168,8 @@ public class DbUpdater {
 				null, null, null);
 		if (cursor.getCount() < 1) {
 			Log.d(TAG, "No transactions found!");
-			return null;
+			array.add(new Transaction());
+//			return array;
 		} else {
 			while (cursor.moveToNext()) {
 

@@ -29,16 +29,21 @@ public class TransAdapter extends ArrayAdapter<Transaction> {
 
 			LayoutInflater inflator = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row=inflator.inflate(layoutResourceId, parent, false);
-			
+			row = inflator.inflate(layoutResourceId, parent, false);
 
 		}
+
 		tvHeader = (TextView) row.findViewById(R.id.tvTransHeader);
 		tvAmt = (TextView) row.findViewById(R.id.tvTransAmt);
-		System.out.println(transaction.getHeader()+":"+Float.toString(transaction.getAmount()));
-		System.out.println("tvHeader:"+tvHeader.isEnabled());
-		tvHeader.setText(transaction.getHeader());
-		tvAmt.setText(Float.toString(transaction.getAmount()));
+		if (transaction != null) {
+			System.out.println(transaction.getHeader() + ":"
+					+ Float.toString(transaction.getAmount()));
+			System.out.println("tvHeader:" + tvHeader.isEnabled());
+			tvHeader.setText(transaction.getHeader());
+			tvAmt.setText(Float.toString(transaction.getAmount()));
+		}else {
+			tvHeader.setText("No transactions found!");
+		}
 		return row;
 	}
 }
