@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CashBook</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_header_entry">HeaderEntry</string>
+    <string name="headerEntryCaption">New Header</string>
+    <string name="headerName">Name</string>
+    <string name="headerCat">Category</string>
+    <string name="headerDesc">Description</string>
+    <string name="headerWarnings">Spending Limits for Warnings</string>
+    <string name="headerLimitDaily">Daily</string>
+    <string name="headerLimitWeekly">Weekly</string>
+    <string name="headerLimitMonthly">Monthly</string>
+    <string name="buttonDone">Done</string>
+    <string name="hintHeaderName">Header Name</string>
+    <string name="hintHeaderCat">Category Name</string>
+    <string name="hintHeaderDesc">Description of the header</string>
+    <string name="hintZeroMoney">0.0</string>
+    <string name="descHeaderMonthlyLimit">Monthly spending limit for this header</string>
+    <string name="title_activity_cash_book">CashBook</string>
+    <string name="headerDisplayTitle">Available Headers</string>
+    <string name="title_activity_trans_entry">TransEntry</string>
+    <string name="transEntryCaption">Transactions</string>
+    <string name="buttonTransEntry">+</string>
+    <string name="hintTransDesc">Description of the Transaction</string>
+    <string name="title_activity_quick_entry">QuickEntry</string>
+    <string name="buttonNow">Now</string>
+    <string name="title_activity_quickEntry">Quick Entry</string>
+    <string name="buttonDatePick">OK</string>
+    <string name="TitleDatePickerDialog">Date and Time of the Transaction</string>
+    <string name="buttonDatePickerDateSet">Date</string>
+    <string name="warningFutureDate">Future dates or time for transactions is not allowed, please pick a date or time in the past</string>
+    <string name="buttonOK">OK</string>
+    <string name="buttonCancel">Cancel</string>
+    <string name="titlePopupTransDesc">Transaction Description</string>
+    <string name="title_activity_date_picker_popup">DatePickerPopup</string>
+    <string name="title_activity_popup_handler">PopupHandler</string>
+    <string name="title_activity_trans_grid">TransGrid</string>
+    <string name="title_activity_transaction_test">TransactionTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_transaction_display">TransactionDisplay</string>
+
+</resources>

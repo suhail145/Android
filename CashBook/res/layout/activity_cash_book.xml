@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="CASH BOOK"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonMainHeaderEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Header Entry" />
+
+    <Button
+        android:id="@+id/buttonMainHeaderDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Headers" />
+
+    <Button
+        android:id="@+id/buttonMainTransEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Transaction" />
+
+    <Button
+        android:id="@+id/buttonMainQuick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quick Entry" />
+
+    <Button
+        android:id="@+id/buttonGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grid View" />
+    <Button
+        android:id="@+id/buttonDBTrans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DB Transcations" />
+
+</LinearLayout>

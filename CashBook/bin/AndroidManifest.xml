@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.DroidApps.cashbook"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="15" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.DroidApps.cashbook.HeaderEntry"
+            android:label="@string/title_activity_header_entry" >
+            <intent-filter>
+                <action android:name="HEADER_ENTRY" />
+
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.CashBookActivity"
+            android:label="@string/title_activity_cash_book" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.DroidApps.cashbook.HeaderDisplay" >
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.TransEntry"
+            android:label="@string/title_activity_trans_entry" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.QuickEntry"
+            android:label="@string/title_activity_quick_entry" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.DatePickerPopup"
+            android:label="@string/title_activity_date_picker_popup" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.PopupHandler"
+            android:label="@string/title_activity_popup_handler" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.TransGrid"
+            android:label="@string/title_activity_trans_grid" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.TransactionTest"
+            android:label="@string/title_activity_transaction_test" >
+        </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.TransactionDisplay"
+            android:label="@string/title_activity_transaction_display" >
+        </activity>
+    </application>
+
+</manifest>
