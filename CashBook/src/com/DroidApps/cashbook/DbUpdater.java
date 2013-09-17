@@ -1,5 +1,8 @@
 package com.DroidApps.cashbook;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,6 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.util.Log;
 
 public class DbUpdater {
@@ -130,9 +134,9 @@ public class DbUpdater {
 		if (date.length == 3) {
 			String[] columns = { "*" };
 			String arg = date[0] + "-" + date[1] + "-" + date[2];
-			String args[] = { arg };
-			Cursor cursor = db.query("transactions", columns, "datestmp = ?",
-					args, null, null, "datestamp");
+			String args[] = { arg + " 00:00:00", arg + " 23:59:59" };
+			Cursor cursor = db.query("transactions", columns, "datestmp between ? and ?",
+					args, null, null, "datestmp");
 			if (cursor.getCount() < 1) {
 				Log.d(TAG, "No transactions found!");
 				return null;
@@ -140,9 +144,9 @@ public class DbUpdater {
 				while (cursor.moveToNext()) {
 
 					Transaction trans = new Transaction();
-					String header = cursor.getString(0);
-					String desc = cursor.getString(2);
-					String amt = cursor.getString(1);
+					String header = cursor.getString(1);
+					String desc = cursor.getString(3);
+					String amt = cursor.getString(2);
 					float amount;
 					if (amt.equals(""))
 						amount = 0;
@@ -160,16 +164,38 @@ public class DbUpdater {
 		}
 	}
 
+	public ArrayList<String> getTransactionDates() {
+		ArrayList<String> transDates = new ArrayList<String>();
+		String[] columns = { "datestmp" };
+		Cursor cursor = db.query("transactions", columns, null, null,
+				null, null, "datestmp");
+		if (cursor.getCount() < 1) {
+			Log.d(TAG, "No transactions found!");
+			return null;
+		} else {
+			while (cursor.moveToNext()) {
+
+				String transDt = cursor.getString(0);
+				String[] dt=transDt.split(" ");
+				if(!transDates.contains(dt[0]))
+					transDates.add(dt[0]);
+				
+			}
+		}
+		return transDates;
+
+	}
+
 	public ArrayList<Transaction> getAllTransactions() {
 		ArrayList<Transaction> array = new ArrayList<Transaction>();
 
 		String[] columns = { "*" };
-		Cursor cursor = db.query("transactions", columns, null, null,
-				null, null, null);
+		Cursor cursor = db.query("transactions", columns, null, null, null,
+				null, "datestmp");
 		if (cursor.getCount() < 1) {
 			Log.d(TAG, "No transactions found!");
 			array.add(new Transaction());
-//			return array;
+			// return array;
 		} else {
 			while (cursor.moveToNext()) {
 
@@ -177,12 +203,13 @@ public class DbUpdater {
 				String header = cursor.getString(1);
 				String desc = cursor.getString(3);
 				String amt = cursor.getString(2);
+				String timestmp = cursor.getString(0);
 				float amount;
 				if (amt.equals(""))
 					amount = 0;
 				else
 					amount = Float.valueOf(amt);
-				trans.updateTransaction(header, amount, desc);
+				trans.updateTransaction(timestmp, header, amount, desc);
 				// Log.d(TAG, "Transaction toString():\n" +
 				// trans.toString());
 				array.add(trans);

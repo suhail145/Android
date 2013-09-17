@@ -14,6 +14,12 @@
         android:layout_height="wrap_content"
         android:text="Transaction Entries"/>
     
+    <Button 
+        android:id="@+id/btTextViewTransByDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction Entries"/>
+    
 	<TextView 
 	    android:id="@+id/testViewText"
 	    android:layout_width="match_parent"

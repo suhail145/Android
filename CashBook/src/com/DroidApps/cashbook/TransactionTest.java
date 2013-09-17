@@ -14,7 +14,7 @@ public class TransactionTest extends Activity {
 	public static final String TAG = TransactionTest.class.getSimpleName();
 	DbUpdater db;
 	TextView tv;
-	Button button1, button2;
+	Button button1, button2, button3;
 	String textV;
 
 	@Override
@@ -72,13 +72,56 @@ public class TransactionTest extends Activity {
 					} else {
 						tv.setText(textV);
 					}
-				}else {
+				} else {
 					tv.setText("No transactions found!");
 				}
 
 			}
 
 		});
+
+		button3 = (Button) findViewById(R.id.btTextViewTransByDay);
+
+		button3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				textV = "";
+				if (db.getTransactionDates() != null) {
+					Iterator<String> itDates = db.getTransactionDates()
+							.iterator();
+					// System.out.println(itDates.hasNext());
+					while (itDates.hasNext()) {
+
+						String date = itDates.next();
+						textV = textV.concat(date+":\n");
+						if (db.getDayTransactions(date) != null) {
+							Iterator<Transaction> itTrans = db
+									.getDayTransactions(date).iterator();
+							while (itTrans.hasNext()) {
+								Transaction trans = itTrans.next();
+								textV = textV.concat(trans.getHeader() + "\t"
+										+ Float.toString(trans.getAmount())
+										+ "\n");
+								System.out.println(textV);
+							}
+						}
+
+					}
+					if (textV.isEmpty()) {
+						tv.setText("No transactions to display");
+						System.out.println(textV);
+					} else {
+						tv.setText(textV);
+					}
+				} else {
+					tv.setText("No transactions found!");
+				}
+
+			}
+
+		});
+
 	}
 
 }

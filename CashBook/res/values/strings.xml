@@ -41,5 +41,6 @@
     <string name="title_activity_transaction_test">TransactionTest</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_transaction_display">TransactionDisplay</string>
+    <string name="title_activity_transaction_by_day">TransactionByDay</string>
 
 </resources>

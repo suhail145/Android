@@ -85,6 +85,10 @@
             android:name="com.DroidApps.cashbook.TransactionDisplay"
             android:label="@string/title_activity_transaction_display" >
         </activity>
+        <activity
+            android:name="com.DroidApps.cashbook.TransactionByDay"
+            android:label="@string/title_activity_transaction_by_day" >
+        </activity>
     </application>
 
 </manifest>

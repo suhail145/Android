@@ -1,5 +1,6 @@
 package com.DroidApps.cashbook;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,6 +36,26 @@ public class Transaction {
 	public void updateTransaction(Date d, String head, Float amt, String desc) {
 		if (d != null)
 			this.dt = d;
+		if (head != null)
+			this.header = head;
+		if (amt != null)
+			this.amount = amt;
+		if (desc != null)
+			this.description = desc;
+
+		if (dt != null && header != null && amount != null) {
+			isNull = false;
+		}
+	}
+	
+	public void updateTransaction(String d, String head, Float amt, String desc) {
+		if (d != null){
+			try {
+				this.dt=dateFormat.parse(d);
+			} catch (ParseException e) {
+				Log.d(TAG,"Bad date string, date nul for this transaction");
+			}
+		}
 		if (head != null)
 			this.header = head;
 		if (amt != null)
