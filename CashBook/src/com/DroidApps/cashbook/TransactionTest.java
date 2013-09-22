@@ -32,20 +32,15 @@ public class TransactionTest extends Activity {
 			public void onClick(View arg0) {
 				textV = "";
 				Iterator<String> it = db.getHeaders().iterator();
-				System.out.println(it.hasNext());
 				while (it.hasNext()) {
 					textV = textV.concat(it.next() + "\n");
-					System.out.println(textV);
 				}
 				if (textV.isEmpty()) {
 					tv.setText("No headers to display");
-					System.out.println(textV);
 				} else {
 					tv.setText(textV);
 				}
-
 			}
-
 		});
 
 		button2 = (Button) findViewById(R.id.btTextViewTransactions);
@@ -56,27 +51,23 @@ public class TransactionTest extends Activity {
 			public void onClick(View arg0) {
 				textV = "";
 				if (db.getTransactionDates() != null) {
-					Iterator<String> it = db.getTransactionDates()
-							.iterator();
-//					System.out.println(it.hasNext());
+					Iterator<String> it = db.getTransactionDates().iterator();
 					while (it.hasNext()) {
 
 						String date = it.next();
 						Float amt = db.getAmtByDates(date, date);
-						textV = textV.concat(date+" : "+amt.toString()+"\n");
+						textV = textV.concat(date + " : " + amt.toString()
+								+ "\n");
 					}
 					if (textV.isEmpty()) {
 						tv.setText("No transactions to display");
-						System.out.println(textV);
 					} else {
 						tv.setText(textV);
 					}
 				} else {
 					tv.setText("No transactions found!");
 				}
-
 			}
-
 		});
 
 		button3 = (Button) findViewById(R.id.btTextViewTransByDay);
@@ -86,33 +77,26 @@ public class TransactionTest extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				textV = "";
-//				int count=0;
 				if (db.getTransactionDates() != null) {
 					Iterator<String> itHeaders = db.getHeadersWithTrans()
 							.iterator();
-					// System.out.println(itDates.hasNext());
-					
+
 					while (itHeaders.hasNext()) {
 
 						String header = itHeaders.next();
 						Float amt = db.getAmtByHeader(header);
-						textV = textV.concat(header+" : "+amt.toString()+"\n");
-//						count++;
-
+						textV = textV.concat(header + " : " + amt.toString()
+								+ "\n");
 					}
 					if (textV.isEmpty()) {
 						tv.setText("No transactions to display");
-						System.out.println(textV);
 					} else {
 						tv.setText(textV);
 					}
 				} else {
 					tv.setText("No transactions found!");
 				}
-//				System.out.println(" No of Headers :"+count);
-
 			}
-
 		});
 
 	}

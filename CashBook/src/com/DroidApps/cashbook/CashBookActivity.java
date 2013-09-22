@@ -12,7 +12,8 @@ import android.widget.Button;
 public class CashBookActivity extends Activity {
 
 	public static final String TAG = CashBookActivity.class.getSimpleName();
-	Button cbHeaderEntry, cbHeaderDisplay, cbTransEntry, cbQuickEntry, cbGrid, cbDBTrans,cbDispTrans;
+	Button cbHeaderEntry, cbHeaderDisplay, cbTransEntry, cbDBTrans,
+			cbDispTrans;
 	Context context;
 
 	@Override
@@ -24,10 +25,9 @@ public class CashBookActivity extends Activity {
 		cbHeaderEntry = (Button) findViewById(R.id.buttonMainHeaderEntry);
 		cbHeaderDisplay = (Button) findViewById(R.id.buttonMainHeaderDisplay);
 		cbTransEntry = (Button) findViewById(R.id.buttonMainTransEntry);
-		cbQuickEntry = (Button) findViewById(R.id.buttonMainQuick);
-		cbGrid = (Button) findViewById(R.id.buttonGrid);
-		cbDBTrans= (Button) findViewById(R.id.buttonDBTrans);
-		cbDispTrans=(Button) findViewById(R.id.buttonTransDisplay);
+
+		cbDBTrans = (Button) findViewById(R.id.buttonDBTrans);
+		cbDispTrans = (Button) findViewById(R.id.buttonTransDisplay);
 
 		cbDispTrans.setOnClickListener(new OnClickListener() {
 
@@ -47,18 +47,6 @@ public class CashBookActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(context, TransactionTest.class);
-				// intent.setAction("HEADER_ENTRY");
-				startActivity(intent);
-
-			}
-
-		});
-		
-		cbGrid.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(context, TransGrid.class);
 				// intent.setAction("HEADER_ENTRY");
 				startActivity(intent);
 
@@ -101,15 +89,6 @@ public class CashBookActivity extends Activity {
 
 		});
 
-		cbQuickEntry.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, QuickEntry.class);
-				startActivity(intent);
-			}
-
-		});
 	}
 
 	@Override
