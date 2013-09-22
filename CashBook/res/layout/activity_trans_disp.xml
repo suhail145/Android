@@ -6,12 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".TransactionByDay" >
+    tools:context=".TransDisp" >
 
     <ExpandableListView
-        android:id="@+id/lvTransByDay"
+        android:id="@+id/lvTransList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:clickable="true"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true" />
 
 </LinearLayout>

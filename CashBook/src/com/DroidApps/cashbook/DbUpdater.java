@@ -1,17 +1,12 @@
 package com.DroidApps.cashbook;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import android.util.Log;
 
 public class DbUpdater {
@@ -59,12 +54,23 @@ public class DbUpdater {
 			return headers;
 		}
 		while (!cursor.isLast()) {
-			// Log.d(TAG, "Entered while loop");
-			// Log.d(TAG, "Cursor at position " + i);
 			cursor.moveToNext();
-			// i++;
-			// Log.d(TAG, "cursor entry = " + cursor.getString(0));
 			headers.add(cursor.getString(0));
+		}
+		return headers;
+	}
+
+	public ArrayList<String> getHeadersWithTrans() {
+		ArrayList<String> headers = new ArrayList<String>();
+		String[] columns = { "distinct header" };
+		Cursor cursor = db.query("transactions", columns, null, null, null,
+				null, null);
+		// System.out.println("Distinct headers found :" + cursor.getCount());
+		if (cursor.getCount() > 0) {
+			while (!cursor.isLast()) {
+				cursor.moveToNext();
+				headers.add(cursor.getString(0));
+			}
 		}
 		return headers;
 	}
@@ -77,13 +83,7 @@ public class DbUpdater {
 				null, null);
 		if (cursor.getCount() > 0) {
 			cursor.moveToNext();
-			Log.d(TAG,
-					" Name = " + cursor.getString(0) + "; Cat: "
-							+ cursor.getString(1) + "; Desc: "
-							+ cursor.getString(2) + "; DLimit: "
-							+ cursor.getFloat(3) + "; WLimit: "
-							+ cursor.getFloat(4) + "; MLimit"
-							+ cursor.getFloat(5));
+
 			header.updateHeaderName(cursor.getString(0), cursor.getString(1),
 					cursor.getString(2), cursor.getFloat(3),
 					cursor.getFloat(4), cursor.getFloat(5));
@@ -135,8 +135,8 @@ public class DbUpdater {
 			String[] columns = { "*" };
 			String arg = date[0] + "-" + date[1] + "-" + date[2];
 			String args[] = { arg + " 00:00:00", arg + " 23:59:59" };
-			Cursor cursor = db.query("transactions", columns, "datestmp between ? and ?",
-					args, null, null, "datestmp");
+			Cursor cursor = db.query("transactions", columns,
+					"datestmp between ? and ?", args, null, null, "datestmp");
 			if (cursor.getCount() < 1) {
 				Log.d(TAG, "No transactions found!");
 				return null;
@@ -153,8 +153,6 @@ public class DbUpdater {
 					else
 						amount = Float.valueOf(amt);
 					trans.updateTransaction(header, amount, desc);
-					// Log.d(TAG, "Transaction toString():\n" +
-					// trans.toString());
 					array.add(trans);
 				}
 			}
@@ -164,10 +162,14 @@ public class DbUpdater {
 		}
 	}
 
-	public ArrayList<String> getTransactionDates() {
-		ArrayList<String> transDates = new ArrayList<String>();
-		String[] columns = { "datestmp" };
-		Cursor cursor = db.query("transactions", columns, null, null,
+	public ArrayList<Transaction> getHeaderTransactions(String byHeader) {
+
+		ArrayList<Transaction> array = new ArrayList<Transaction>();
+
+		String[] columns = { "*" };
+
+		String args[] = { byHeader };
+		Cursor cursor = db.query("transactions", columns, "header = ?", args,
 				null, null, "datestmp");
 		if (cursor.getCount() < 1) {
 			Log.d(TAG, "No transactions found!");
@@ -175,11 +177,81 @@ public class DbUpdater {
 		} else {
 			while (cursor.moveToNext()) {
 
+				Transaction trans = new Transaction();
+				String header = cursor.getString(1);
+				String desc = cursor.getString(3);
+				String amt = cursor.getString(2);
+				float amount;
+				if (amt.equals(""))
+					amount = 0;
+				else
+					amount = Float.valueOf(amt);
+				trans.updateTransaction(header, amount, desc);
+				array.add(trans);
+			}
+		}
+		return array;
+
+	}
+
+	public Float getAmtByDates(String stDate, String enDate) {
+		String[] sDate = stDate.split("-");
+		String[] eDate = enDate.split("-");
+		Float amt = (float) 0;
+		if (sDate.length == 3 & eDate.length == 3) {
+			String[] columns = { "amount" };
+			String args[] = { stDate + " 00:00:00", enDate + " 23:59:59" };
+			Cursor cursor = db.query("transactions", columns,
+					"datestmp between ? and ?", args, null, null, "datestmp");
+			if (cursor.getCount() < 1) {
+				Log.d(TAG, "No transactions found for these dates!");
+				return null;
+			} else {
+				while (cursor.moveToNext()) {
+					amt = amt + Float.parseFloat(cursor.getString(0));
+				}
+			}
+		} else {
+			Log.d(TAG, "Date format given for getAmtByDates() is wrong!");
+			return null;
+		}
+
+		return amt;
+	}
+
+	public Float getAmtByHeader(String byHeader) {
+		Float amt = (float) 0;
+		String[] columns = { "amount" };
+		String args[] = { byHeader };
+		Cursor cursor = db.query("transactions", columns,
+				"header = ?", args, null, null, "datestmp");
+		if (cursor.getCount() < 1) {
+			Log.d(TAG, "No transactions found for these dates!");
+			return null;
+		} else {
+			while (cursor.moveToNext()) {
+				amt = amt + Float.parseFloat(cursor.getString(0));
+			}
+		}
+		return amt;
+	}
+
+	public ArrayList<String> getTransactionDates() {
+		ArrayList<String> transDates = new ArrayList<String>();
+		String[] columns = { "datestmp" };
+		Cursor cursor = db.query("transactions", columns, null, null, null,
+				null, "datestmp");
+		if (cursor.getCount() < 1) {
+			Log.d(TAG, "No transactions found!");
+			return null;
+		} else {
+			while (cursor.moveToNext()) {
+
 				String transDt = cursor.getString(0);
-				String[] dt=transDt.split(" ");
-				if(!transDates.contains(dt[0]))
+				String[] dt = transDt.split(" ");
+				if (!transDates.contains(dt[0]))
 					transDates.add(dt[0]);
-				
+
 			}
 		}
 		return transDates;
@@ -210,8 +282,6 @@ public class DbUpdater {
 				else
 					amount = Float.valueOf(amt);
 				trans.updateTransaction(timestmp, header, amount, desc);
-				// Log.d(TAG, "Transaction toString():\n" +
-				// trans.toString());
 				array.add(trans);
 			}
 		}

@@ -3,7 +3,9 @@ package com.DroidApps.cashbook;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.util.Log;
 
@@ -16,7 +18,10 @@ public class Transaction {
 	private String description = "";
 	private boolean isNull = true;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss");
+			"yyyy-MM-dd h:mm a", Locale.US);
+	@SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("dd-MM-yy");
+//	private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.US);
 
 	public Transaction() {
 
@@ -47,13 +52,13 @@ public class Transaction {
 			isNull = false;
 		}
 	}
-	
+
 	public void updateTransaction(String d, String head, Float amt, String desc) {
-		if (d != null){
+		if (d != null) {
 			try {
-				this.dt=dateFormat.parse(d);
+				this.dt = dateFormat.parse(d);
 			} catch (ParseException e) {
-				Log.d(TAG,"Bad date string, date nul for this transaction");
+				Log.d(TAG, "Bad date string, date nul for this transaction");
 			}
 		}
 		if (head != null)
@@ -122,6 +127,12 @@ public class Transaction {
 	}
 
 	public String getDateString() {
+
+		String date = dateOnlyFormat.format(dt);
+		return date;
+	}
+
+	public String getDayString() {
 
 		String date = dateFormat.format(dt);
 		return date;

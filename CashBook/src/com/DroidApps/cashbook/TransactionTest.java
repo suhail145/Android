@@ -49,22 +49,21 @@ public class TransactionTest extends Activity {
 		});
 
 		button2 = (Button) findViewById(R.id.btTextViewTransactions);
-
+		button2.setText("Totals by Dates");
 		button2.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				textV = "";
-				if (db.getAllTransactions() != null) {
-					Iterator<Transaction> it = db.getAllTransactions()
+				if (db.getTransactionDates() != null) {
+					Iterator<String> it = db.getTransactionDates()
 							.iterator();
-					System.out.println(it.hasNext());
+//					System.out.println(it.hasNext());
 					while (it.hasNext()) {
 
-						Transaction trans = it.next();
-						textV = textV.concat(trans.getHeader() + "\t"
-								+ Float.toString(trans.getAmount()) + "\n");
-						System.out.println(textV);
+						String date = it.next();
+						Float amt = db.getAmtByDates(date, date);
+						textV = textV.concat(date+" : "+amt.toString()+"\n");
 					}
 					if (textV.isEmpty()) {
 						tv.setText("No transactions to display");
@@ -81,31 +80,24 @@ public class TransactionTest extends Activity {
 		});
 
 		button3 = (Button) findViewById(R.id.btTextViewTransByDay);
-
+		button3.setText("Totals by Headers");
 		button3.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				textV = "";
+//				int count=0;
 				if (db.getTransactionDates() != null) {
-					Iterator<String> itDates = db.getTransactionDates()
+					Iterator<String> itHeaders = db.getHeadersWithTrans()
 							.iterator();
 					// System.out.println(itDates.hasNext());
-					while (itDates.hasNext()) {
+					
+					while (itHeaders.hasNext()) {
 
-						String date = itDates.next();
-						textV = textV.concat(date+":\n");
-						if (db.getDayTransactions(date) != null) {
-							Iterator<Transaction> itTrans = db
-									.getDayTransactions(date).iterator();
-							while (itTrans.hasNext()) {
-								Transaction trans = itTrans.next();
-								textV = textV.concat(trans.getHeader() + "\t"
-										+ Float.toString(trans.getAmount())
-										+ "\n");
-								System.out.println(textV);
-							}
-						}
+						String header = itHeaders.next();
+						Float amt = db.getAmtByHeader(header);
+						textV = textV.concat(header+" : "+amt.toString()+"\n");
+//						count++;
 
 					}
 					if (textV.isEmpty()) {
@@ -117,6 +109,7 @@ public class TransactionTest extends Activity {
 				} else {
 					tv.setText("No transactions found!");
 				}
+//				System.out.println(" No of Headers :"+count);
 
 			}
 

@@ -33,7 +33,8 @@ public class CashBookActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(context, TransactionByDay.class);
+				Intent intent = new Intent(context, TransDisp.class);
+				intent.putExtra("view", "byHeaders");
 				// intent.setAction("HEADER_ENTRY");
 				startActivity(intent);
 
