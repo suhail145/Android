@@ -138,7 +138,7 @@ public class DbUpdater {
 			Cursor cursor = db.query("transactions", columns,
 					"datestmp between ? and ?", args, null, null, "datestmp");
 			if (cursor.getCount() < 1) {
-				Log.d(TAG, "No transactions found!");
+				Log.d(TAG, "No transactions found for "+ arg+ "!");
 				return null;
 			} else {
 				while (cursor.moveToNext()) {
@@ -172,7 +172,7 @@ public class DbUpdater {
 		Cursor cursor = db.query("transactions", columns, "header = ?", args,
 				null, null, "datestmp");
 		if (cursor.getCount() < 1) {
-			Log.d(TAG, "No transactions found!");
+			Log.d(TAG, "No transactions found for "+byHeader+ "!");
 			return null;
 		} else {
 			while (cursor.moveToNext()) {
@@ -226,7 +226,7 @@ public class DbUpdater {
 		Cursor cursor = db.query("transactions", columns,
 				"header = ?", args, null, null, "datestmp");
 		if (cursor.getCount() < 1) {
-			Log.d(TAG, "No transactions found for these dates!");
+			Log.d(TAG, "No transactions found for this Header!");
 			return null;
 		} else {
 			while (cursor.moveToNext()) {
@@ -242,7 +242,7 @@ public class DbUpdater {
 		Cursor cursor = db.query("transactions", columns, null, null, null,
 				null, "datestmp");
 		if (cursor.getCount() < 1) {
-			Log.d(TAG, "No transactions found!");
+			Log.d(TAG, "No transactions, hence no dates found!");
 			return null;
 		} else {
 			while (cursor.moveToNext()) {
@@ -265,7 +265,7 @@ public class DbUpdater {
 		Cursor cursor = db.query("transactions", columns, null, null, null,
 				null, "datestmp");
 		if (cursor.getCount() < 1) {
-			Log.d(TAG, "No transactions found!");
+			Log.d(TAG, "No transactions found! Please add a few");
 			array.add(new Transaction());
 			// return array;
 		} else {

@@ -18,9 +18,11 @@ public class Transaction {
 	private String description = "";
 	private boolean isNull = true;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"yyyy-MM-dd h:mm a", Locale.US);
+			"dd-MMM-yyyy h:mm a", Locale.US);
 	@SuppressLint("SimpleDateFormat")
-	private SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("dd-MM-yy");
+	private SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("dd-MMM-yyyy");
+	@SuppressLint("SimpleDateFormat")
+	private SimpleDateFormat sqlDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
 //	private SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.US);
 
 	public Transaction() {
@@ -101,7 +103,7 @@ public class Transaction {
 
 	public ContentValues getValue() {
 		ContentValues values = new ContentValues();
-		String date = dateFormat.format(dt);
+		String date = sqlDateFormat.format(dt);
 		values.put("datestmp", date);
 		values.put("header", header);
 		values.put("amount", amount);

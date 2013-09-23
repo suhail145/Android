@@ -15,11 +15,6 @@
         <activity
             android:name="com.DroidApps.cashbook.HeaderEntry"
             android:label="@string/title_activity_header_entry" >
-            <intent-filter>
-                <action android:name="HEADER_ENTRY" />
-
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.CashBookActivity"
@@ -35,47 +30,22 @@
         <activity
             android:name="com.DroidApps.cashbook.TransEntry"
             android:label="@string/title_activity_trans_entry" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.QuickEntry"
             android:label="@string/title_activity_quick_entry" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.DatePickerPopup"
             android:label="@string/title_activity_date_picker_popup" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.PopupHandler"
             android:label="@string/title_activity_popup_handler" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.TransGrid"
             android:label="@string/title_activity_trans_grid" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.DroidApps.cashbook.TransactionTest"

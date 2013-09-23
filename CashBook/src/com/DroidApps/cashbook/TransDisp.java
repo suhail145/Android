@@ -7,8 +7,11 @@ import java.util.Iterator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
@@ -23,6 +26,7 @@ public class TransDisp extends Activity {
 	HashMap<String, ArrayList<Transaction>> dayTrans;
 	TransDispAdapter adapter = null;
 	Intent intent;
+	private GestureDetector mDetector; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class TransDisp extends Activity {
 		db = new DbUpdater(this);
 		lvTransDisp = (ExpandableListView) findViewById(R.id.lvTransList);
 		dayTrans = new HashMap<String, ArrayList<Transaction>>();
+		mDetector = new GestureDetector(this, new MyGestureListener());
 		
 		intent = getIntent();
 		String view = intent.getStringExtra("view");
@@ -121,7 +126,30 @@ public class TransDisp extends Activity {
 			
 		return super.onOptionsItemSelected(item);
 	}
-
 	
+	@Override 
+    public boolean onTouchEvent(MotionEvent event){ 
+		System.out.println(event.toString());
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+	
+	class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures"; 
+        
+        @Override
+        public boolean onDown(MotionEvent event) { 
+            Log.d(DEBUG_TAG,"onDown: " + event.toString()); 
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2, 
+                float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
+            return true;
+        }
+        
+    }
 
 }

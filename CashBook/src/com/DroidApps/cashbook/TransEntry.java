@@ -94,10 +94,10 @@ public class TransEntry extends Activity {
 					submit = (Button) datePicker
 							.findViewById(R.id.buttonDatePick);
 
-					String[] dt = trans.getDateString().split(" ");
+					String[] dt = trans.getDayString().split(" ");
 
 					date.setText(dt[0]);
-					time.setText(dt[1]);
+					time.setText(dt[1]+dt[2]);
 
 					timePick.setCurrentHour(trans.getDate().getHours());
 					timePick.setCurrentMinute(trans.getDate().getMinutes());
@@ -135,8 +135,8 @@ public class TransEntry extends Activity {
 							} else {
 								trans.setDate(dt);
 								Log.d(TAG,
-										"Date set is " + trans.getDateString());
-								tvDate.setText(trans.getDateString());
+										"Date set is " + trans.getDayString());
+								tvDate.setText(trans.getDayString());
 								// modDate.setText(R.string.buttonDatePickerDateSet);
 								datePicker.dismiss();
 							}
@@ -199,21 +199,21 @@ public class TransEntry extends Activity {
 				// after the DB entry, reset the transaction
 				trans = null;
 				trans = new Transaction();
-				// dateTime = trans.getDateString().split(" ");
-				tvDate.setText(trans.getDateString());
+				// dateTime = trans.getDayString().split(" ");
+				tvDate.setText(trans.getDayString());
 
 				// tvTime.setText(dateTime[1]);
 			}
 
 		});
 
-		// dateTime = trans.getDateString().split(" ");
-		tvDate.setText(trans.getDateString());
+		// dateTime = trans.getDayString().split(" ");
+		tvDate.setText(trans.getDayString());
 
 		// tvTime.setText(dateTime[1]);
 
-		Log.d(TAG, trans.getDateString());
-		Toast.makeText(context, trans.getDateString(), Toast.LENGTH_SHORT)
+		Log.d(TAG, trans.getDayString());
+		Toast.makeText(context, trans.getDayString(), Toast.LENGTH_SHORT)
 				.show();
 
 	}

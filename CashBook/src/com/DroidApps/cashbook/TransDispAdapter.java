@@ -134,11 +134,12 @@ public class TransDispAdapter extends BaseExpandableListAdapter {
 		TextView tvAmt = (TextView) headView.findViewById(R.id.tvTransDispAmt);
 		tvHead.setText(dispHead);
 		Float amt = (float) 0;
-		if (listRowResourceId == DispByDayID)
+		if (listRowResourceId == DispByDayID){
+			System.out.println(dispHead);
 			amt = db.getAmtByDates(dispHead, dispHead);
-		else
+		}else
 			amt = db.getAmtByHeader(dispHead);
-
+		System.out.println(amt);
 		tvAmt.setText(amt.toString());
 		return headView;
 	}
