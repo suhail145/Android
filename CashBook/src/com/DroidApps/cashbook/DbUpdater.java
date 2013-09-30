@@ -100,7 +100,7 @@ public class DbUpdater {
 	}
 
 	public ArrayList<Transaction> getQuickTrans() {
-		ArrayList<Transaction> array = new ArrayList<Transaction>();
+		ArrayList<Transaction> array = CashBookApplication.getTransArray();
 		array.clear();
 		String[] columns = { "*" };
 		Cursor cursor = db.query("quickentry", columns, null, null, null, null,
@@ -130,7 +130,7 @@ public class DbUpdater {
 
 	public ArrayList<Transaction> getDayTransactions(String day) {
 		String[] date = day.split("-");
-		ArrayList<Transaction> array = new ArrayList<Transaction>();
+		ArrayList<Transaction> array = CashBookApplication.getTransArray();
 		if (date.length == 3) {
 			String[] columns = { "*" };
 			String arg = date[0] + "-" + date[1] + "-" + date[2];
@@ -164,7 +164,7 @@ public class DbUpdater {
 
 	public ArrayList<Transaction> getHeaderTransactions(String byHeader) {
 
-		ArrayList<Transaction> array = new ArrayList<Transaction>();
+		ArrayList<Transaction> array = CashBookApplication.getTransArray();
 
 		String[] columns = { "*" };
 
@@ -259,7 +259,7 @@ public class DbUpdater {
 	}
 
 	public ArrayList<Transaction> getAllTransactions() {
-		ArrayList<Transaction> array = new ArrayList<Transaction>();
+		ArrayList<Transaction> array = CashBookApplication.getTransArray();
 
 		String[] columns = { "*" };
 		Cursor cursor = db.query("transactions", columns, null, null, null,
